@@ -10,8 +10,8 @@ Status: bundled (ships with the kit) | downloaded (added later, committed).
 | skill-hunter | bundled | kit-authored | 2026-08-18 |
 | web-search | bundled | ~/.agents/skills/web-search (DSH: pi-web-access tools) | 2026-08-18 |
 | code-navigation | bundled | ~/.agents/skills/code-navigation | 2026-08-18 |
-| systematic-debugging | bundled | kit-authored (superpowers standard) | 2026-08-18 |
-| verification-before-completion | bundled | kit-authored (superpowers standard) | 2026-08-18 |
+| systematic-debugging | bundled | kit-authored | 2026-08-18 |
+| verification-before-completion | bundled | kit-authored | 2026-08-18 |
 | token-thrift | bundled | kit-authored | 2026-08-18 |
 | writing-plans | bundled | kit-authored | 2026-08-18 |
 | code-review-excellence | bundled | kit-authored | 2026-08-18 |
