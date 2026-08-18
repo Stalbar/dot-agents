@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: 4-phase root-cause investigation for bugs, test failures, and unexpected behaviors before proposing fixes. Eliminates guess-and-patch token waste.
+description: "Use when encountering any bug, test failure, or unexpected error, before proposing or applying fixes. Enforces 4-phase root cause investigation to prevent token-wasting guessing loops."
 ---
 
 # Systematic Debugging
@@ -19,22 +19,21 @@ Never propose or apply code edits until completing Phase 1.
 
 ## The Four Phases
 
-### Phase 1: Root Cause Investigation
-1. **Read Error Details**: Inspect exact error messages, line numbers, and stack traces.
-2. **Reproduce Minimally**: Run the minimal failing command or test.
-3. **Check Changes**: Run `git diff` or review recent commits to identify what introduced the fault.
-4. **Trace Data Flow**: Trace invalid state backwards to its origin rather than patching where the symptom appears.
+1. **Phase 1: Root Cause Investigation**
+   - Read exact error messages and stack traces.
+   - Reproduce minimally. Trace invalid state backwards to the source.
+2. **Phase 2: Pattern Analysis**
+   - Locate working counterparts in the codebase and compare contracts.
+3. **Phase 3: Single Hypothesis & Minimal Test**
+   - State hypothesis: *"X fails because Y occurs under condition Z."*
+   - Validate with the smallest possible test or log.
+4. **Phase 4: Targeted Fix & Verification**
+   - Apply surgical fix at the root cause. Verify all tests pass.
+   - **Escalation Rule**: If 3 successive fix attempts fail, STOP. Re-evaluate architecture.
 
-### Phase 2: Pattern Analysis
-1. **Locate Working Counterparts**: Find similar working patterns within the codebase.
-2. **Compare Contracts**: Spot discrepancies in inputs, configs, types, or environment variables.
+---
 
-### Phase 3: Single Hypothesis & Minimal Test
-1. **State Hypothesis**: Explicitly formulate: *"X fails because Y occurs under condition Z."*
-2. **Test Minimally**: Make the smallest possible change or diagnostic log to validate the hypothesis.
+## Supporting References
 
-### Phase 4: Targeted Fix & Verification
-1. **Write/Update Failing Test**: Ensure a test captures the exact regression.
-2. **Apply Surgical Fix**: Modify only the root cause.
-3. **Verify**: Ensure all tests pass with zero regressions.
-4. **Escalation Rule**: If 3 successive fix attempts fail, STOP. Re-evaluate assumptions or discuss architectural mismatch.
+- Root cause tracing guide: `resources/root-cause-tracing.md`
+- Sample debugging workflow: `examples/debugging-session.md`

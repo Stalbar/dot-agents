@@ -1,6 +1,6 @@
 ---
 name: token-thrift
-description: Best practices and rules for minimizing token consumption and context window bloat across any AI harness and language.
+description: "Use during all coding, file reading, command execution, and review tasks to minimize token consumption and context window bloat."
 ---
 
 # Token Thrift (Context Optimization)
@@ -10,28 +10,24 @@ Maximizes reasoning capacity and minimizes token cost by eliminating redundant r
 ---
 
 ## 1. Targeted Code Navigation
+- Use `rg`, `ast-grep`, and ctags to find exact line numbers.
+- Read only relevant slices (`StartLine`/`EndLine`). Never read large files in full.
 
-- **Never read entire files blindly**: Use `code-navigation` tools (`rg`, `ast-grep`, `ctags`, grep) to find exact line numbers.
-- **Slice reads**: When reading files, supply explicit line ranges (`StartLine`/`EndLine` or `sed`/`head`/`tail`) instead of dumping thousands of lines into context.
-- **Narrow directory listings**: List specific subdirectories rather than entire project trees.
-
----
-
-## 2. Surgical Code Modifications
-
-- **Avoid full-file replacements**: Use line-bounded replacement tools (`replace_file_content` / diff blocks) targeting only the necessary lines.
-- **Do not regenerate untouched boilerplate**: Keep imports and existing functions intact without re-emitting them.
-
----
+## 2. Surgical Code Edits
+- Apply line-bounded replacements (`replace_file_content` / diff blocks).
+- Never regenerate untouched boilerplate or whole files.
 
 ## 3. Command Output Discipline
+- Filter noisy logs (`rg -i error`, `head -n 30`, `--quiet`).
+- Rely on exit codes before printing full outputs.
 
-- **Filter noisy CLI output**: Pipe noisy test/build commands through filters (e.g. `rg -i error`, `head -n 30`, or `--quiet` flags) when full logs are unnecessary.
-- **Check exit codes first**: Run concise verification rather than dumping hundreds of passing test logs.
+## 4. Concise Communication
+- Code first, facts second, minimal prose.
+- Follow Ponytail pattern: `[code/diff] -> skipped: [X], add when [Y].`
 
 ---
 
-## 4. Concise Communication
+## Supporting Assets & References
 
-- **Code first, minimal prose**: Provide the solution and necessary facts. Avoid marketing text, restating user prompts, or repeating whole file contents in the final response.
-- **Use Ponytail format**: `[code/diff] -> skipped: [X], add when [Y].`
+- Token efficiency techniques: `resources/token-saving-rules.md`
+- Compact interaction examples: `examples/compact-interactions.md`

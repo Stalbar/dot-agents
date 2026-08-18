@@ -1,6 +1,6 @@
 ---
 name: writing-plans
-description: Break specs and requirements into bite-sized, testable, dependency-ordered tasks before touching code.
+description: "Use when you have a specification or requirements for a multi-step task, before touching code. Breaks work into bite-sized, testable, dependency-ordered tasks."
 ---
 
 # Writing Plans
@@ -14,9 +14,9 @@ Structured task decomposition prevents context thrashing, rework, and specificat
 1. **Goal**: One clear sentence defining the deliverable.
 2. **Architecture**: 2-3 sentences outlining the approach.
 3. **Bite-Sized Tasks**:
-   - Each task targets specific files (create, modify, or test).
-   - Each task specifies consumed and produced interfaces.
-   - Each task specifies exact test commands and verification criteria.
+   - Explicit file boundaries (create, modify, test).
+   - Consumed and produced interfaces between steps.
+   - Exact test verification commands for each step.
 
 ---
 
@@ -25,3 +25,10 @@ Structured task decomposition prevents context thrashing, rework, and specificat
 - No placeholders (`TODO`, `TBD`, `implement later`).
 - Keep tasks atomic and independently verifiable.
 - Sequence dependencies linearly so earlier tasks unblock later tasks.
+
+---
+
+## Supporting Assets & References
+
+- Reusable plan template: `assets/plan-template.md`
+- Sample implementation plan: `examples/sample-plan.md`

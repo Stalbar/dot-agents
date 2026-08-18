@@ -1,26 +1,31 @@
 ---
 name: code-review-excellence
-description: Systematic, constructive code review focusing on correctness, security, performance, simplicity, and maintainability.
+description: "Use when reviewing pull requests, diffs, or code changes to provide systematic, constructive feedback on correctness, security, performance, and simplicity."
 ---
 
 # Code Review Excellence
 
-Transform code review into systematic quality and security verification.
+Systematic, constructive review focusing on correctness, security, performance, and maintainability.
 
 ---
 
-## Review Dimensions
+## Workflow
 
-1. **Correctness & Edge Cases**: Boundary conditions, null/empty handling, off-by-one errors, async race conditions.
-2. **Simplicity & YAGNI**: Reject unnecessary abstractions, unneeded dependencies, and speculative complexity.
-3. **Security**: Injection vulnerabilities, unvalidated input boundaries, secret leaks, unauthorized access.
-4. **Performance**: Algorithmic complexity (O(n²)), memory leaks, redundant database queries / network roundtrips.
-5. **Testing**: Adequacy of test coverage, failure behavior verification, lack of skipped tests.
+1. **Read Context**: Check requirements, change plans, and test output first.
+2. **Evaluate Core Dimensions**:
+   - **Correctness**: Logic bugs, edge cases (null, empty, boundary).
+   - **Simplicity & YAGNI**: Flag unnecessary abstractions or bloat (Ponytail style).
+   - **Security**: Injection risks, trust boundaries, secret exposure.
+   - **Performance**: Algorithmic bottlenecks (O(n²)), memory leaks, unindexed queries.
+3. **Format Output**:
+   - `## Summary`: 1-2 sentence verdict.
+   - `## Blocking Issues`: Must fix before merge (quote exact lines).
+   - `## Simplifications & Improvements`: YAGNI suggestions.
+   - `## Verified Tests`: Test execution results.
 
 ---
 
-## Feedback Format
+## Supporting References
 
-- **Summary**: Concise high-level verdict.
-- **Blocking Issues**: Must be fixed before merge.
-- **Improvements**: Recommended simplifications or optimizations.
+- Deep inspection checklist: `resources/review-checklist.md`
+- Few-shot review example: `examples/sample-code-review.md`

@@ -11,10 +11,11 @@ Before any work, read:
 
 1. `.agents/workflow.md` - the process, stages, and gates
 2. `.agents/rules/communication.md` - how to communicate with the user
-3. Every other file in `.agents/rules/` - general rules
-4. `.agents/architecture.md` - project architecture (filled by `/agents-init`)
-5. `.agents/context.md` - current project state (update it freely)
-6. `.agents/coding_standards.md` - code style (filled by `/agents-init`)
+3. Every other file in `.agents/rules/` - general rules (including `memory.md`, `skills.md`)
+4. `.agents/USER.md` - developer profile, communication style, and preferences
+5. `.agents/architecture.md` - project architecture (filled by `/agents-init`)
+6. `.agents/context.md` - current project state (update it freely)
+7. `.agents/coding_standards.md` - code style (filled by `/agents-init`)
 
 ## 2. Commands
 
@@ -73,7 +74,8 @@ Constraints:
 ## 5. Rules that override everything
 
 - Never modify `.agents/` files without an explicit user request, except
-  `context.md`, `skills/MANIFEST.md`, and new files the user asked to add.
+  `context.md`, `USER.md`, `memory/`, `skills/MANIFEST.md`, and new files the
+  user asked to add.
 - Never change files in the repository without explicit confirmation or an
   approved change plan.
 - Implementation is complete only when the new tests AND the whole existing

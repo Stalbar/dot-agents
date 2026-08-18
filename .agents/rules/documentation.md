@@ -25,12 +25,12 @@ Always update:
 - Completion reports after implementing
 - README when functionality changes
 - `.agents/architecture.md` when structure changes
-- `.agents/context.md` freely, at any time
+- `.agents/context.md` and `.agents/memory/` freely, at any time
 - Configuration docs when configuration changes
 
 ## Never update without asking
 
 - User code
 - Dependencies
-- Anything inside `.agents/` except `context.md`, `skills/MANIFEST.md`, and
-  new files the user asked to add
+- Anything inside `.agents/` except `context.md`, `USER.md`, `memory/`,
+  `skills/MANIFEST.md`, and new files the user asked to add

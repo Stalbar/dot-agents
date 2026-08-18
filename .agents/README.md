@@ -92,23 +92,25 @@ in `.agents/rules/scripts.md`.
 
 ## Skills
 
-Bundled: `grill-me`, `ponytail`, `tdd-testing`, `skill-hunter`, `web-search`,
-`code-navigation`. The agent is free to download any appropriate skill into
-`.agents/skills/` and records it in `skills/MANIFEST.md`
-(`rules/skills.md`). Downloaded skills are committed to git.
+Bundled skills follow the standard progressive anatomy (`SKILL.md`, `scripts/`, `resources/`, `assets/`, `examples/`):
+- `ponytail`, `grill-me`, `token-thrift`, `systematic-debugging`, `verification-before-completion`, `writing-plans`, `code-review-excellence`, `code-navigation`, `tdd-testing`, `skill-hunter`, `web-search`.
+
+All skills are registered in `skills/MANIFEST.md` and committed to git.
 
 ## Structure
 
 ```
 .agents/
 ├── AGENTS.md            entry point for every agent
+├── USER.md              developer profile and preferences
 ├── workflow.md          the pipeline and gates
 ├── rules/               general rules + generated *_local.md
+├── memory/              rolling daily logs (YYYY-MM-DD.md)
 ├── agents/              subagent definitions
 ├── commands/            command files + scripts/
 ├── prompts/             paste-in prompts
-├── skills/              bundled + downloaded skills
-├── templates/           init templates (docs + rules)
+├── skills/              bundled + downloaded skills (scripts, resources, assets)
+├── templates/           init templates (docs, rules, user profile)
 ├── architecture.md      filled at init (11 mandatory sections)
 ├── project_overview.md  filled at init
 ├── coding_standards.md  filled at init
