@@ -28,19 +28,13 @@ Approval syntax: `APPROVED`, `Approve <gate-id>`, or
 `Approved: <artifact-path>`. Generic words (ok, proceed, do it) are not
 approval. Reviewer verdicts are advisory. Details: `.agents/workflow.md`.
 
-## Install (one manual step)
+## Install
 
-Copy into the repo root:
+Copy `.agents/` into your project root:
 
-1. `.agents/`
-2. the four files from `bootstrap/`:
-   - `AGENTS.md` (root)
-   - `GEMINI.md` (root)
-   - `CLAUDE.md` (root)
-   - `cursor-rules-agents.mdc` → `.cursor/rules/agents.mdc`
-
-The root pointers exist from second zero, so `/agents-init` works as the very
-first message in any harness.
+```bash
+cp -r /path/to/dot-agents/.agents ./
+```
 
 ## Initialize
 
@@ -50,12 +44,9 @@ Type in your agent:
 /agents-init
 ```
 
-Not `/init` (that is a built-in command in Antigravity and Claude Code). The
-init agent runs the grill-me interview, fills the templates, generates
-`rules/*_local.md`, installs skills, creates the starter scripts and the
-`docs/` folders, and writes the harness bootstrap pointers. No project code is
-touched. For harnesses without command input, paste
-`.agents/prompts/init-project.md` instead.
+(Or paste `.agents/prompts/init-project.md` for agents without custom slash command support).
+
+The init agent runs the grill-me interview, explicitly asks which coding agent(s) you use (e.g. Antigravity, Claude Code, Cursor, DSH), generates root bootstrap pointer files for only those selected, fills project configuration templates, and configures test/lint runner scripts. Zero project code is touched.
 
 Re-init is safe: existing customized files are never overwritten silently.
 

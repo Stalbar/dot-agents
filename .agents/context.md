@@ -5,7 +5,7 @@
 ## Recent Changes
 - Bundled general-purpose, harness-independent skills into `.agents/skills/`: `grill-me`, `ponytail`, `code-navigation`, `systematic-debugging`, `verification-before-completion`, `token-thrift`, `writing-plans`, `code-review-excellence`, `tdd-testing`, `skill-hunter`, and `web-search`.
 - Updated `skills/MANIFEST.md`.
-- Updated agent definitions in `.agents/agents/` (`implementer`, `test-writer`, `planner`, `architect`, `code-reviewer`, `plan-reviewer`, `adr-reviewer`) to integrate mandatory skills and token-thrift execution.
+- Updated `/agents-init` workflow to explicitly query for target coding agents during the interview and generate bootstrap pointers only for selected harnesses.
 
 ## Current State
 

@@ -17,8 +17,9 @@ exactly, step by step.
 - Never overwrite an existing customized file silently. Use the overwrite
   guard from the command file (ask, or back up to `<name>.bak-<date>` first).
 - Every generated rule file stays under 12,000 characters.
-- Use the grill-me skill for the interview: one question at a time, each with
-  your recommended answer.
+- Use the grill-me skill for the interview: ask one question at a time, starting
+  with which coding agents are used, and generate root bootstrap pointers only for
+  the selected harnesses.
 - You are free to download and install any appropriate skill into
   `.agents/skills/`. Record every skill (name, source, date) in
   `skills/MANIFEST.md` and `context.md`.
