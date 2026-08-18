@@ -1,0 +1,6 @@
+settings.local.json
+credentials.md
+.DS_Store
+
+# Project-specific rules (generated at init, not shared in repo)
+rules/*_local.md

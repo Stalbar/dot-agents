@@ -1,0 +1,133 @@
+# .agents - Portable AI Governance Kit
+
+A folder you copy into any repository. One command, `/agents-init`, adapts it
+to that project's stack using the `grill-me` skill. From then on, it governs
+every AI agent working in the repo: one workflow, one rule set, one agent
+roster, automatic commands, and a growing library of parametrized scripts.
+
+Agent- and harness-independent. Tested targets: Antigravity (Gemini models),
+DSH (DeepSeek/MiMo models), Claude Code, Cursor.
+
+## The pipeline
+
+Five stages, four review gates. Only the user approves a gate.
+
+```mermaid
+flowchart LR
+    A[ADR] --> R1{Gate R1}
+    R1 --> B[Implementation Plan]
+    B --> R2{Gate R2}
+    R2 --> C[Change Plan]
+    C --> R3{Gate R3}
+    R3 --> D[Unit Tests first]
+    D --> R4{Gate R4}
+    R4 --> E[Implement direct changes]
+```
+
+Approval syntax: `APPROVED`, `Approve <gate-id>`, or
+`Approved: <artifact-path>`. Generic words (ok, proceed, do it) are not
+approval. Reviewer verdicts are advisory. Details: `.agents/workflow.md`.
+
+## Install (one manual step)
+
+Copy into the repo root:
+
+1. `.agents/`
+2. the four files from `bootstrap/`:
+   - `AGENTS.md` (root)
+   - `GEMINI.md` (root)
+   - `CLAUDE.md` (root)
+   - `cursor-rules-agents.mdc` → `.cursor/rules/agents.mdc`
+
+The root pointers exist from second zero, so `/agents-init` works as the very
+first message in any harness.
+
+## Initialize
+
+Type in your agent:
+
+```
+/agents-init
+```
+
+Not `/init` (that is a built-in command in Antigravity and Claude Code). The
+init agent runs the grill-me interview, fills the templates, generates
+`rules/*_local.md`, installs skills, creates the starter scripts and the
+`docs/` folders, and writes the harness bootstrap pointers. No project code is
+touched. For harnesses without command input, paste
+`.agents/prompts/init-project.md` instead.
+
+Re-init is safe: existing customized files are never overwritten silently.
+
+## Harness matrix
+
+| Harness | Root pointer | Commands | Skills | Subagents |
+|---------|--------------|----------|--------|-----------|
+| DSH (DeepSeek/MiMo) | root AGENTS.md | dispatch rule | `.agents/skills/` natively | native |
+| Antigravity (Gemini) | root AGENTS.md + GEMINI.md | dispatch rule | mapped at init | per harness docs |
+| Claude Code | root CLAUDE.md (`@.agents/AGENTS.md`) | auto-registered from `commands/` | project skills | `agents/` frontmatter |
+| Cursor | `.cursor/rules/agents.mdc` | command copies | reference material | per harness docs |
+
+## Commands
+
+All in `.agents/commands/`. Dispatch rule: when the user types `/name`, read
+`commands/name.md` and follow it exactly.
+
+| Command | Purpose |
+|---------|---------|
+| `/agents-init` | Initialize the kit for this project (grill-me interview) |
+| `/new-adr <title>` | Create the next ADR (Gate R1) |
+| `/new-implementation-plan <adr-ref>` | WHAT plan (Gate R2) |
+| `/new-change-plan <impl-plan-ref>` | HOW plan (Gate R3) |
+| `/new-tests <change-plan-ref>` | Tests first (Gate R4) |
+| `/implement <change-plan-ref>` | Direct changes, green tests, report |
+| `/code-review <path\|staged\|range>` | Structured review report |
+| `/run-tests <unit\|integration\|all>` | Run the suite |
+| `/completion-report <change-plan-ref>` | Write the report |
+| `/update-context` | Refresh context.md |
+| `/commit <summary>` | Format, stage, show, confirm, commit |
+| `/pre-commit-checks` | Lint + fast tests |
+
+`commands/KNOWN-BUILTINS.md` is the static collision list. Kit command names
+are fixed; no runtime renaming.
+
+## Scripts
+
+`commands/scripts/` holds reusable parametrized scripts the agents create and
+maintain (`.sh`/`.ps1` pairs or `.py`). Two-times rule: the third time the
+agent repeats an action sequence, it scripts it. Parameters come from CLI
+args, then env vars. Command files invoke scripts only through the wrappers
+in `.agents/rules/scripts.md`.
+
+## Skills
+
+Bundled: `grill-me`, `ponytail`, `tdd-testing`, `skill-hunter`, `web-search`,
+`code-navigation`. The agent is free to download any appropriate skill into
+`.agents/skills/` and records it in `skills/MANIFEST.md`
+(`rules/skills.md`). Downloaded skills are committed to git.
+
+## Structure
+
+```
+.agents/
+├── AGENTS.md            entry point for every agent
+├── workflow.md          the pipeline and gates
+├── rules/               general rules + generated *_local.md
+├── agents/              subagent definitions
+├── commands/            command files + scripts/
+├── prompts/             paste-in prompts
+├── skills/              bundled + downloaded skills
+├── templates/           init templates (docs + rules)
+├── architecture.md      filled at init (11 mandatory sections)
+├── project_overview.md  filled at init
+├── coding_standards.md  filled at init
+├── credentials.md       filled at init (gitignored)
+├── context.md           working memory, updated freely
+└── settings.local.json  local permission overrides (gitignored)
+
+docs/                    created at init
+├── 00_adr/
+├── 01_implementation_plans/
+├── 02_change_plans/
+└── 03_test_plans/
+```
