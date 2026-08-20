@@ -12,6 +12,10 @@ Proposed (awaiting Gate R3 review)
 
 ## Affected files
 
+## Impact Map (Blast Radius)
+
+- Traced callers, downstream consumers, and test files affected by modified symbols.
+
 ## Implementation steps
 
 (file-level, ordered)

@@ -21,3 +21,7 @@
 ### Implemented differently
 
 (with an explanation of how differently and why)
+
+## Gap Round (What Was NOT Verified)
+
+- List any edge cases, production environments, live external APIs, or manual UX flows that were not verified. Report gaps openly.

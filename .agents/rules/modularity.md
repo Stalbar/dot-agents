@@ -20,3 +20,7 @@ every language the project uses.
    line between groups.
 8. **Testability.** Every new module must be importable by tests without side
    effects at import time. Module top level contains definitions only, no work.
+9. **Call-Graph Reachability Gate.** After wiring any new feature, service, or
+   endpoint, grep production entry points to confirm it is actually called.
+   Compilation is not proof of wiring. If a new symbol has zero callers from
+   application entry points, it is dead code and not done.

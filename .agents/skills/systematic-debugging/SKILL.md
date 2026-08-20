@@ -29,7 +29,8 @@ Never propose or apply code edits until completing Phase 1.
    - Validate with the smallest possible test or log.
 4. **Phase 4: Targeted Fix & Verification**
    - Apply surgical fix at the root cause. Verify all tests pass.
-   - **Escalation Rule**: If 3 successive fix attempts fail, STOP. Re-evaluate architecture.
+   - **Oscillation Circuit Breaker**: If tool calls oscillate (`A -> B -> A -> B -> A`), fix loop delta is ~0, or the same error repeats 3 times: STOP immediately. Change ONE variable or stop and offer the user 2-3 concrete options.
+   - **Escalation Rule**: If 3 successive fix attempts fail, STOP. Re-evaluate architecture with human partner.
 
 ---
 

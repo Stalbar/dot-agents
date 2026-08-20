@@ -59,6 +59,8 @@ Delegate each stage to exactly one specialist subagent defined in
 - `planner` writes implementation plans and change plans
 - `test-writer` writes tests (before implementation)
 - `implementer` makes direct changes to project code
+- `surgeon` performs isolated micro-fixes and targeted bug repairs
+- `hunter` conducts read-only whole-codebase audits and sweeps
 - `adr-reviewer`, `plan-reviewer`, `code-reviewer` produce verdicts only
 
 Constraints:

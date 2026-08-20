@@ -40,6 +40,7 @@ Fill every template section:
 
 - Background and issue description
 - Affected files (complete list)
+- Impact map / blast radius (traced callers, consumers, and tests)
 - Implementation steps (file-level, ordered)
 - Testing checklist
 - Minimal necessary unit and integration tests for the new functionality

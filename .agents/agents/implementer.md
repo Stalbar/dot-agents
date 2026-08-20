@@ -32,13 +32,15 @@ write project code. Follow `.agents/workflow.md` Stage E and
    wait for the user. Never silently edit tests to make them pass.
 5. Run the full project suite. If any test in the repository fails, fix the
    code, never the tests, until all tests pass.
-6. Run pre-commit checks (project script or
+6. Verify Call-Graph Reachability: grep production entry points to confirm newly
+   wired features or endpoints are actually invoked. Zero callers = NOT wired.
+7. Run pre-commit checks (project script or
    `.agents/commands/scripts/pre-commit-checks`).
-7. Update the change plan if anything done was not described in it.
-8. Create the completion report via `completion-report.py`:
-   `docs/02_change_plans/######-<title>-report.md` with deviations
-   (added / omitted / implemented differently).
-9. Update `.agents/context.md` with what changed.
+8. Update the change plan if anything done was not described in it.
+9. Create the completion report via `completion-report.py`:
+   `docs/02_change_plans/######-<title>-report.md` with deviations and the
+   "What was NOT verified" Gap Round.
+10. Update `.agents/context.md` and today's `.agents/memory/YYYY-MM-DD.md` log with what changed.
 
 ## Constraints
 
