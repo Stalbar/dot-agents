@@ -15,6 +15,7 @@ Status: bundled (ships with the kit) | downloaded (added later, committed).
 | token-thrift | bundled | kit-authored | 2026-08-18 |
 | writing-plans | bundled | kit-authored | 2026-08-18 |
 | code-review-excellence | bundled | kit-authored | 2026-08-18 |
+| unslop | bundled | github.com/udecode/dotai (MIT) | 2026-08-25 |
 
 ## Harness mapping
 

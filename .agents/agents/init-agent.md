@@ -12,8 +12,9 @@ exactly, step by step.
 ## Constraints
 
 - Do not modify any project code. Do not start any development work.
-- You may write inside `.agents/` and create the `docs/` folders, root
-  bootstrap files, and starter scripts only.
+- You may write inside `.agents/` (filling templates, generating modular
+  `rules/*_local.md` for the stack, installing skills) and create the `docs/`
+  folders, root bootstrap files, and starter scripts only.
 - Never overwrite an existing customized file silently. Use the overwrite
   guard from the command file (ask, or back up to `<name>.bak-<date>` first).
 - Every generated rule file stays under 12,000 characters.

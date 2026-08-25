@@ -63,7 +63,10 @@ recommended answer. Walk this decision tree in order:
   overwriting. When overwriting, create a timestamped backup
   `<name>.bak-<date>` first.
 - Generate `rules/*_local.md` from the matching `templates/rules/*.template.md`
-  (only the ones that apply). Keep each generated file under 12,000 characters.
+  for the project's selected languages, frameworks, and infrastructure (e.g.
+  `csharp_local.md`, `python_local.md`, `typescript_local.md`, `golang_local.md`,
+  `security_local.md`, `api_local.md`, `docker_local.md`, `env_local.md`).
+  Keep each generated file under 12,000 characters.
 - Create `docs/00_adr/`, `docs/01_implementation_plans/`, `docs/02_change_plans/`,
   `docs/03_test_plans/`, each with a short README explaining numbering.
 - Generate root bootstrap files ONLY for the coding agent(s) selected in Question 1:

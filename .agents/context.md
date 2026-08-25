@@ -10,6 +10,9 @@
 - Standardized `.agents/skills/` to the 4-part progressive disclosure architecture (`SKILL.md`, `scripts/`, `resources/`, `assets/`, `examples/`).
 - Adopted core discipline patterns from `deepseek-harness-discipline`: Call-Graph Reachability Gate (`rules/modularity.md`), Oscillation Circuit Breaker (`token-thrift`, `systematic-debugging`), Gap Round reporting (`completion-report.template.md`, `verification-before-completion`), and Impact Mapping (`planner.md`, `change-plan.template.md`).
 - Added specialized subagents `surgeon` (micro-fixes) and `hunter` (codebase sweeps).
+- Added `unslop` skill (prose de-slop and AI tell auditing) following 4-part progressive structure.
+- Added modular rule templates for C#, TypeScript, Go, and Security in `templates/rules/`.
+- Updated `/agents-init` to instantiate stack-specific local rules during initialization.
 
 ## Current State
 
