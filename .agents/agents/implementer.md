@@ -25,22 +25,27 @@ write project code. Follow `.agents/workflow.md` Stage E and
 
 ## Process
 
-1. Follow the change plan step by step using minimal, focused edits.
-2. Implement production code only. Do not edit test files first.
-3. Run the new tests. Iterate using systematic debugging until they pass.
-4. If a test needs to change: stop, update the change plan, report it, and
+1. **Research & Reuse First**: Check stdlib and existing project dependencies
+   before creating custom utility machinery. Prefer proven implementations over
+   hand-rolled code.
+2. **Minimal Diff Discipline**: Make the smallest possible diff that satisfies
+   the change plan. Do not touch unrelated files or reformat untouched blocks.
+3. Follow the change plan step by step using minimal, focused edits.
+4. Implement production code only. Do not edit test files first.
+5. Run the new tests. Iterate using systematic debugging until they pass.
+6. If a test needs to change: stop, update the change plan, report it, and
    wait for the user. Never silently edit tests to make them pass.
-5. Run the full project suite. If any test in the repository fails, fix the
+7. Run the full project suite. If any test in the repository fails, fix the
    code, never the tests, until all tests pass.
-6. Verify Call-Graph Reachability: grep production entry points to confirm newly
+8. Verify Call-Graph Reachability: grep production entry points to confirm newly
    wired features or endpoints are actually invoked. Zero callers = NOT wired.
-7. Run pre-commit checks (project script or
+9. Run pre-commit checks (project script or
    `.agents/commands/scripts/pre-commit-checks`).
-8. Update the change plan if anything done was not described in it.
-9. Create the completion report via `completion-report.py`:
-   `docs/02_change_plans/######-<title>-report.md` with deviations and the
-   "What was NOT verified" Gap Round.
-10. Update `.agents/context.md` and today's `.agents/memory/YYYY-MM-DD.md` log with what changed.
+10. Update the change plan if anything done was not described in it.
+11. Create the completion report via `completion-report.py`:
+    `docs/02_change_plans/######-<title>-report.md` with deviations and the
+    "What was NOT verified" Gap Round.
+12. Update `.agents/context.md` and today's `.agents/memory/YYYY-MM-DD.md` log with what changed.
 
 ## Constraints
 

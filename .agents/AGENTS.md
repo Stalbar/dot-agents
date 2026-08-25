@@ -11,7 +11,7 @@ Before any work, read:
 
 1. `.agents/workflow.md` - the process, stages, and gates
 2. `.agents/rules/communication.md` - how to communicate with the user
-3. Every other file in `.agents/rules/` - general rules (including `memory.md`, `skills.md`)
+3. Every other file in `.agents/rules/` - general rules (including `memory.md`, `security.md`, `skills.md`)
 4. `.agents/USER.md` - developer profile, communication style, and preferences
 5. `.agents/architecture.md` - project architecture (filled by `/agents-init`)
 6. `.agents/context.md` - current project state (update it freely)

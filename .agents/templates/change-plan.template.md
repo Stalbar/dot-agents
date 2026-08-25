@@ -16,6 +16,11 @@ Proposed (awaiting Gate R3 review)
 
 - Traced callers, downstream consumers, and test files affected by modified symbols.
 
+## Dependencies & Risks
+
+- External libraries or version requirements (stdlib and existing dependencies first).
+- Potential breaking changes or migration requirements.
+
 ## Implementation steps
 
 (file-level, ordered)

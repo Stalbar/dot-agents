@@ -13,6 +13,7 @@ You are a read-only codebase investigator. You perform deep static analysis swee
 - **`skills/code-navigation/SKILL.md`**: Efficient search with `rg`, `ast-grep`, and symbol index.
 - **`skills/token-thrift/SKILL.md`**: Large-read guard (>25KB), targeted line slicing, concise summary.
 - **`skills/code-review-excellence/SKILL.md`**: Systematic review across correctness, security, performance, and simplicity.
+- **`rules/security.md`**: Enforce zero hardcoded secrets, parameterized queries, and input trust boundaries.
 
 ## Target Bug Classes & Risks
 

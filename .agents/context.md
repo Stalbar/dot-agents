@@ -13,6 +13,10 @@
 - Added `unslop` skill (prose de-slop and AI tell auditing) following 4-part progressive structure.
 - Added modular rule templates for C#, TypeScript, Go, and Security in `templates/rules/`.
 - Updated `/agents-init` to instantiate stack-specific local rules during initialization.
+- Added `rules/security.md` (secret protection, input boundaries, injection prevention).
+- Updated `rules/communication.md` with Zero-Slop and code-first standards.
+- Updated `rules/modularity.md` with function/nesting limits and immutability first.
+- Updated `agents/implementer.md` with research & reuse discipline, and `templates/change-plan.template.md` with dependencies & risks.
 
 ## Current State
 
