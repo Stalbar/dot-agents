@@ -17,6 +17,7 @@
 - Updated `rules/communication.md` with Zero-Slop and code-first standards.
 - Updated `rules/modularity.md` with function/nesting limits and immutability first.
 - Updated `agents/implementer.md` with research & reuse discipline, and `templates/change-plan.template.md` with dependencies & risks.
+- Added modular rule template `templates/rules/wordpress.template.md` covering WordPress security, hook purity, and SiteGround platform constraints (Speed Optimizer cache purging, Security Optimizer limits).
 
 ## Current State
 
