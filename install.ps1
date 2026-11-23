@@ -120,6 +120,11 @@ Get-ChildItem -Path $sourceAgents -Recurse -Force | ForEach-Object {
         return
     }
 
+    # Exclude local override files (*.local.*)
+    if ($item.Name -like "*.local.*") {
+        return
+    }
+
     $destPath = Join-Path $targetAgents $relPath
 
     if ($item.PSIsContainer) {

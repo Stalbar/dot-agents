@@ -127,6 +127,7 @@ find . -mindepth 1 | while read -r item; do
         .git|.git/*) continue ;;
         *__pycache__*|*.pyc|*.pyo) continue ;;
         .kit-manifest) continue ;;
+        *.local.*) continue ;;
     esac
 
     if [ -d "$src_item" ]; then
