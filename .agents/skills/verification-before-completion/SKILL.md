@@ -1,11 +1,11 @@
 ---
 name: verification-before-completion
-description: Requires running fresh verification commands and inspecting output before claiming tasks, bugs, or tests are complete. Evidence before assertions.
+description: "Use when verifying code changes, running pre-commit checks, proving tests pass, and generating completion reports. Do not use for initial planning or authoring new tests."
 ---
 
 # Verification Before Completion
 
-Claiming completion without fresh verification leads to false positives, broken pipelines, and wasted context.
+Enforces evidence-based task completion with zero unverified claims.
 
 ## The Iron Law
 
@@ -13,24 +13,15 @@ Claiming completion without fresh verification leads to false positives, broken 
 NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 ```
 
-Never declare a fix or task complete without executing the check and inspecting the output in the current step.
-
----
+Never declare a fix or task complete without executing the verification command and inspecting the output in the current step.
 
 ## Verification Protocol
 
-1. **Identify the Check**: What exact test, build, or linter command proves the claim?
-2. **Execute**: Run the full command cleanly.
-3. **Inspect Output**: Check exit codes and exact failure counts.
-4. **Call-Graph Reachability**: Grep production entry points to confirm newly wired components or endpoints are actually invoked. Zero callers = NOT wired.
-5. **The Gap Round**: Explicitly state what was NOT verified (e.g. live cloud APIs, manual UI interactions). Report gaps openly.
-6. **Report Facts**: Quote the actual output or status with verifiable evidence.
-
----
-
-## Anti-Patterns to Avoid
-
-- Saying *"This should now work"* or *"Tests probably pass"* without running them.
-- Extrapolating build success from a passing linter.
-- Claiming an issue is resolved because code was modified, without re-testing the original reproduction.
-- Declaring a feature complete when no production entry point calls it.
+1. **Run Full Test Suite:** Execute the project test command. Inspect exit code and exact failure count. Never assume passing status.
+2. **Call-Graph Reachability Gate:** Grep production entry points to confirm newly added components or endpoints are actively wired and invoked. If a symbol has zero callers, it is dead code.
+3. **Run Pre-Commit Checks:** Execute project linters, formatters, and type checkers.
+4. **Gap Round:** Explicitly state what was NOT verified (e.g. live cloud APIs, production databases).
+5. **Generate Completion Report:**
+   - Run helper: `python .agents/skills/verification-before-completion/scripts/completion-report.py <change-plan-ref>`
+   - Saves to `docs/02_change_plans/######-<slug>-report.md`.
+   - Record what was done, actual verification output, reachability evidence, and deviations.

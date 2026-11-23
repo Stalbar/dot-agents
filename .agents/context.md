@@ -1,28 +1,17 @@
 # Current Context
 
-**Last Updated:** 2026-08-18
+**Last Updated:** 2026-11-23
 
 ## Recent Changes
-- Bundled general-purpose, harness-independent skills into `.agents/skills/`: `grill-me`, `ponytail`, `code-navigation`, `systematic-debugging`, `verification-before-completion`, `token-thrift`, `writing-plans`, `code-review-excellence`, `tdd-testing`, `skill-hunter`, and `web-search`.
-- Updated `skills/MANIFEST.md`.
-- Updated `/agents-init` workflow to explicitly query for target coding agents during the interview and generate bootstrap pointers only for selected harnesses.
-- Implemented workspace memory architecture: added `USER.md` (developer profile), `rules/memory.md`, and rolling `memory/` logs.
-- Standardized `.agents/skills/` to the 4-part progressive disclosure architecture (`SKILL.md`, `scripts/`, `resources/`, `assets/`, `examples/`).
-- Adopted core discipline patterns from `deepseek-harness-discipline`: Call-Graph Reachability Gate (`rules/modularity.md`), Oscillation Circuit Breaker (`token-thrift`, `systematic-debugging`), Gap Round reporting (`completion-report.template.md`, `verification-before-completion`), and Impact Mapping (`planner.md`, `change-plan.template.md`).
-- Added specialized subagents `surgeon` (micro-fixes) and `hunter` (codebase sweeps).
-- Added `unslop` skill (prose de-slop and AI tell auditing) following 4-part progressive structure.
-- Added modular rule templates for C#, TypeScript, Go, and Security in `templates/rules/`.
-- Updated `/agents-init` to instantiate stack-specific local rules during initialization.
-- Added `rules/security.md` (secret protection, input boundaries, injection prevention).
-- Updated `rules/communication.md` with Zero-Slop and code-first standards.
-- Updated `rules/modularity.md` with function/nesting limits and immutability first.
-- Updated `agents/implementer.md` with research & reuse discipline, and `templates/change-plan.template.md` with dependencies & risks.
-- Added modular rule template `templates/rules/wordpress.template.md` covering WordPress security, hook purity, and SiteGround platform constraints (Speed Optimizer cache purging, Security Optimizer limits).
+- Refactored repository into lean Anthropic Agent Skills-compliant architecture.
+- Replaced separate `agents/`, `commands/`, `prompts/`, and `rules/` layers with flat skills under `.agents/skills/`.
+- Condensed `.agents/AGENTS.md` to under 100 lines for high Flash-model token efficiency.
+- Preserved complete 5-stage / 4-gate artifact lifecycle (`docs/00_adr`, `docs/01_implementation_plans`, `docs/02_change_plans`, `docs/03_test_plans`).
+- Replaced all platform-specific shell scripts with cross-platform Python 3 stdlib implementations.
+- Folded testing discipline into `writing-plans` and renamed `skill-hunter` to `find-skills`.
 
 ## Current State
+- Ready for active development under Antigravity and DSH harnesses.
 
-Not initialized.
-
-## Known Issues
-
-## Open Questions
+## Next Steps
+- Execute `/project-init` when configuring for specific project repositories.

@@ -1,26 +1,15 @@
 ---
 name: unslop
-description: "Use when drafting, reviewing, or editing prose, ADRs, documentation, or commit messages to remove AI writing tells, generic filler, and buzzwords while locking factual substance."
+description: "Use when auditing or rewriting prose, documentation, ADRs, or commit messages to remove AI writing tells and marketing fluff. Do not use for reviewing code logic or syntax."
 ---
 
-# Unslop (Prose De-Slop Discipline)
+# Unslop (Zero-Slop Prose)
 
-Eliminates AI writing tells, throat-clearing openers, generic buzzwords, and robotic rhythm from documentation and plans while preserving technical substance and author voice.
+Eliminates AI cliches, throat-clearing openers, buzzwords, and marketing fluff from documentation and commit messages.
 
----
+## Guidelines
 
-## Core Rules
-
-1. **Cut Empty Framing**: Remove throat-clearing openers (*"It is worth noting that..."*) and generic optimistic endings (*"In conclusion, the future looks bright..."*).
-2. **Lock Technical Substance**: Never alter facts, code signatures, paths, numbers, or domain-specific terms.
-3. **Eliminate Buzzwords & Emojis**: Replace promotional adjectives (`seamless`, `robust`, `transformative`) with concrete mechanisms or delete them. Remove gratuitous emojis.
-4. **Vary Cadence Naturally**: Break robotic symmetry. Avoid forcing lists into three items or overusing em dashes (`—`).
-5. **Direct Verbs First**: Replace `has the ability to execute` with `executes`; replace `serves as a connection to` with `connects to`.
-
----
-
-## Supporting Assets & References
-
-- Complete pattern catalog: `resources/slop-patterns.md`
-- Sample before/after rewrites: `examples/sample-unslop.md`
-- Scanner script: `scripts/audit-prose.py`
+1. **No AI Tells:** Eliminate filler words (`dive into`, `seamless`, `robust`, `testament to`, `leverage`, `foster`).
+2. **Code & Facts First:** State technical conclusions directly without introductory throat-clearing.
+3. **No Cheerleading Endings:** End on concrete next actions, test results, or open decisions.
+4. **Audit Tool:** Run `python .agents/skills/unslop/scripts/audit-prose.py <file>` to detect slop patterns.

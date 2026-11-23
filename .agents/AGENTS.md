@@ -1,89 +1,45 @@
-# .agents - Agent Governance Bootstrap
+# .agents Governance
 
-This file is the entry point for every AI agent working in this repository.
-Follow it before doing anything else. It is agent- and harness-independent:
-the same rules apply whether the agent runs in Antigravity (Gemini), DSH
-(DeepSeek/MiMo), Claude Code, Cursor, or any other harness.
+Entry point for AI agents in this repository. Portable across Antigravity and DeepSeek Harness (`dsh`).
 
-## 1. Read order
+## 1. Core Engineering & Communication Invariants
 
-Before any work, read:
+- **Truthful & Direct:** Code and verified facts first. No filler, throat-clearing, marketing fluff, or cheerleading endings. Keep explanations under 3 lines unless a report is requested.
+- **YAGNI & Simplicity (Ponytail):** Standard library first. Shortest working diffs. No unrequested abstractions, premature generalizations, or speculative config.
+- **Never Change Code Without Approval:** No file changes without an approved Change Plan (Gate R3) or explicit user instruction ("Implement <ref>").
+- **Security Guardrails:** Never print, commit, or hardcode secrets or credentials. Always use parameterized queries and validate input at trust boundaries.
+- **Modularity & Reachability:** Keep functions under 50 lines and modules under 300 lines. Pure logic at the core, I/O at edges. Confirm newly added symbols have active callers from production entry points (zero callers = dead code).
+- **Verification Before Completion:** No completion claims without fresh verification evidence. Always run tests and verify output before declaring done.
+- **Gate Protocol & Strict Approval:** After producing any planning artifact, STOP and present the path, a short summary, a verification checklist, and "Awaiting your review".
+  - Approval syntax is strictly: `APPROVED`, `Approve <gate-id>` (e.g. `Approve R2`), or `Approved: <path>`. Generic words (ok, proceed, do it) are NOT approval.
 
-1. `.agents/workflow.md` - the process, stages, and gates
-2. `.agents/rules/communication.md` - how to communicate with the user
-3. Every other file in `.agents/rules/` - general rules (including `memory.md`, `security.md`, `skills.md`)
-4. `.agents/USER.md` - developer profile, communication style, and preferences
-5. `.agents/architecture.md` - project architecture (filled by `/agents-init`)
-6. `.agents/context.md` - current project state (update it freely)
-7. `.agents/coding_standards.md` - code style (filled by `/agents-init`)
+## 2. Artifact-Driven Workflow Map
 
-## 2. Commands
+| Lifecycle Stage | Slash Command / Trigger | Primary Skill | Standard Output Artifact |
+|---|---|---|---|
+| Architectural Decision | `/adr` | `skills/adr` | `docs/00_adr/######-<title>.md` (Gate R1) |
+| Feature / System Roadmap | `/writing-plans` | `skills/writing-plans` | `docs/01_implementation_plans/######-<title>.md` (Gate R2) |
+| Scoped Change Plan (HOW) | `/writing-plans` | `skills/writing-plans` | `docs/02_change_plans/######-<title>.md` (Gate R3) |
+| Pre-Implementation Tests | `/writing-plans` | `skills/writing-plans` | Failing tests + `docs/03_test_plans/######-<title>.md` (Gate R4) |
+| Requirements & Trade-offs | `/grill-me` | `skills/grill-me` | Interactive 1-question interview |
+| Minimal Implementation | `/ponytail` | `skills/ponytail` | Minimal working diffs (stdlib first) |
+| Surgical Bug Diagnosis | `/systematic-debugging` | `skills/systematic-debugging` | 4-phase root cause fix + memory log |
+| Verification & Completion | `/verification-before-completion` | `skills/verification-before-completion` | Fresh test evidence + `docs/02_change_plans/######-<title>-report.md` |
+| Code & Cross-Model Review | `/code-review-excellence` | `skills/code-review-excellence` | Advisory structured review |
+| Git Commit | `/git-commit` | `skills/git-commit` | Standardized imperative commit |
+| Project Init & Skill Scout | `/project-init` / `/find-skills` | `skills/project-init`, `skills/find-skills` | Runtime docs (`.agents/*.md`) + stack skills |
 
-When the user types `/name` or asks to "run name", read
-`.agents/commands/name.md` and follow it exactly. If the command needs
-arguments and none were given, ask for them first, one question at a time.
+## 3. Project Context Files
 
-Command files end with an execution block that runs the matching script from
-`.agents/commands/scripts/` through the wrappers defined in
-`.agents/rules/scripts.md`. Never retype the script's logic inline.
+- `.agents/project_overview.md`: High-level domain purpose and core stack.
+- `.agents/architecture.md`: System components, boundaries, and data flows.
+- `.agents/coding_standards.md`: Code formatting, style, and conventions.
+- `.agents/credentials.md`: Locations and mechanisms for credentials (gitignored, no secrets).
+- `.agents/context.md`: Current sprint state, recent changes, and active focus.
+- `.agents/memory/YYYY-MM-DD.md`: Rolling daily log for session progress and debugging lessons.
+*(If any context file is an empty stub, run `/project-init` to populate it).*
 
-If a command file is missing, say so and stop. Do not improvise a replacement.
+## 4. Working Style & Discipline
 
-## 3. The pipeline and gates
-
-All significant work follows the 5-stage / 4-gate pipeline in
-`.agents/workflow.md`:
-
-```
-ADR → [user review] → implementation plan → [user review] → change plan →
-[user review] → unit tests → [user review] → implementation
-```
-
-- After producing an artifact (ADR, plan, tests), STOP and present it:
-  artifact path, a short summary, a checklist of what to verify, and the
-  phrase "Awaiting your review".
-- Approval is only: `APPROVED` (standalone word), `Approve <gate-id>`
-  (e.g. `Approve R2`), or `Approved: <artifact-path>`. Generic words like
-  ok, proceed, apply, or "do it" are NOT approval. If the user uses one,
-  ask: "Did you mean to approve this gate? Reply 'Approve <gate-id>'."
-- Questions are never approval. "How would I fix X?" is a question.
-- Reviewer subagent verdicts are advisory input for the user. Only the user
-  approves a gate. There is no pre-delegation of gates.
-
-## 4. Subagents
-
-Delegate each stage to exactly one specialist subagent defined in
-`.agents/agents/`:
-
-- `architect` writes ADRs
-- `planner` writes implementation plans and change plans
-- `test-writer` writes tests (before implementation)
-- `implementer` makes direct changes to project code
-- `surgeon` performs isolated micro-fixes and targeted bug repairs
-- `hunter` conducts read-only whole-codebase audits and sweeps
-- `adr-reviewer`, `plan-reviewer`, `code-reviewer` produce verdicts only
-
-Constraints:
-
-- Only the `implementer` subagent writes project code. All other subagents
-  propose text in `docs/` or `.agents/` (init-agent) or return reports.
-- Give each subagent: the task, the template path, the paths of all approved
-  artifacts it depends on, the relevant rules, and a read-only view of the
-  repo. Subagents start from files, not from this conversation's memory.
-- Never run subagents in parallel across a gate. A reviewer verdict never
-  replaces user approval.
-
-## 5. Rules that override everything
-
-- Never modify `.agents/` files without an explicit user request, except
-  `context.md`, `USER.md`, `memory/`, `skills/MANIFEST.md`, and new files the
-  user asked to add.
-- Never change files in the repository without explicit confirmation or an
-  approved change plan.
-- Implementation is complete only when the new tests AND the whole existing
-  test suite pass. Never edit tests to make them pass - fix the code.
-- Repeated action sequences become parametrized scripts in
-  `commands/scripts/` (see `.agents/rules/scripts.md`).
-- The agent is free to download and install any appropriate skill into
-  `.agents/skills/` and must record it in `skills/MANIFEST.md`
-  (see `.agents/rules/skills.md`).
+- Prioritize test verification: run tests before claiming success. If tests fail, fix the code, never the test.
+- Maintain persistent daily logs in `.agents/memory/YYYY-MM-DD.md` during complex multi-step debugging.

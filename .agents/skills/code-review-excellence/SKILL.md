@@ -1,31 +1,36 @@
 ---
 name: code-review-excellence
-description: "Use when reviewing pull requests, diffs, or code changes to provide systematic, constructive feedback on correctness, security, performance, and simplicity."
+description: "Use when reviewing code changes, diffs, PRs, or artifacts for correctness, security, performance, and simplicity, or when conducting cross-model reviews. Do not use for writing code or drafting initial plans."
 ---
 
 # Code Review Excellence
 
-Systematic, constructive review focusing on correctness, security, performance, and maintainability.
+Systematic, constructive review focusing on correctness, security, performance, and simplicity.
 
----
+## Review Workflow
 
-## Workflow
+1. **Read Context:** Inspect the relevant Change Plan, ADR, and test output first.
+2. **Evaluate Core Dimensions:**
+   - **Correctness:** Logic flaws, edge cases (empty collections, boundary values, null pointers).
+   - **Security:** Secret leakage, parameterized queries, boundary input validation.
+   - **Simplicity (Ponytail):** Flag unrequested abstractions, premature optimizations, or bloat.
+   - **Modularity & Reachability:** Pure business logic, functions < 50 lines, reachability from entry points.
+3. **Read-Only Static Sweep (Optional Hunter Mode):** Search for bug classes or orphaned code across the repository.
+4. **Structured Verdict Output:**
 
-1. **Read Context**: Check requirements, change plans, and test output first.
-2. **Evaluate Core Dimensions**:
-   - **Correctness**: Logic bugs, edge cases (null, empty, boundary).
-   - **Simplicity & YAGNI**: Flag unnecessary abstractions or bloat (Ponytail style).
-   - **Security**: Injection risks, trust boundaries, secret exposure.
-   - **Performance**: Algorithmic bottlenecks (O(n²)), memory leaks, unindexed queries.
-3. **Format Output**:
-   - `## Summary`: 1-2 sentence verdict.
-   - `## Blocking Issues`: Must fix before merge (quote exact lines).
-   - `## Simplifications & Improvements`: YAGNI suggestions.
-   - `## Verified Tests`: Test execution results.
+```markdown
+## Verdict: approve | approve-with-changes | reject
 
----
+## Critical Issues
+- [Blocking problems that must be fixed before merge]
 
-## Supporting References
+## Major Issues
+- [Significant defects or architectural flaws]
 
-- Deep inspection checklist: `resources/review-checklist.md`
-- Few-shot review example: `examples/sample-code-review.md`
+## Minor Issues
+- [Suggestions, style improvements, naming]
+```
+
+## Cross-Model Review Protocol
+
+To review an artifact with another model, use `.agents/skills/code-review-excellence/resources/cross-model-review-prompt.md`. Verdicts from other models are advisory; only the user approves gates.
