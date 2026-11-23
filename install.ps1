@@ -17,6 +17,12 @@ $targetPath = if ([System.IO.Path]::IsPathRooted($TargetRepo)) {
 }
 $targetPath = [System.IO.Path]::GetFullPath($targetPath)
 
+# Guard against installing into dot-agents repository itself
+if ($targetPath.TrimEnd('\', '/') -ieq $sourceRoot.TrimEnd('\', '/')) {
+    Write-Error "Target repository cannot be the source dot-agents repository: $targetPath"
+    exit 1
+}
+
 if (-not (Test-Path $targetPath -PathType Container)) {
     Write-Error "Target repository directory does not exist: $targetPath"
     exit 1
@@ -41,12 +47,18 @@ if (-not (Test-Path $targetAgents)) {
     New-Item -ItemType Directory -Path $targetAgents -Force | Out-Null
 }
 
-Get-ChildItem -Path $sourceAgents -Recurse | ForEach-Object {
+# Note: Target-only custom skills in .agents/skills/ are naturally preserved since iteration only traverses source files.
+Get-ChildItem -Path $sourceAgents -Recurse -Force | ForEach-Object {
     $item = $_
-    $relPath = $item.FullName.Substring($sourceAgents.Length).TrimStart("\", "/")
+    $relPath = $item.FullName.Substring($sourceAgents.Length).TrimStart('\', '/')
 
-    # Exclude git-related items
-    if ($relPath -like ".git*" -or $relPath -like "*\.git*") {
+    # Exclude .git directory and contents (allow .gitignore and dotfiles)
+    if ($relPath -eq ".git" -or $relPath.StartsWith(".git\") -or $relPath.StartsWith(".git/")) {
+        return
+    }
+
+    # Exclude python cache files and directories
+    if ($relPath -eq "__pycache__" -or $relPath -like "*\__pycache__*" -or $relPath -like "*\__pycache__" -or $relPath -like "*.pyc" -or $relPath -like "*.pyo") {
         return
     }
 
@@ -60,27 +72,9 @@ Get-ChildItem -Path $sourceAgents -Recurse | ForEach-Object {
         $fileName = $item.Name
         $isProtected = $protectedFiles -contains $fileName -and ($item.DirectoryName -eq $sourceAgents)
 
-        # Check for repo-installed custom skills
-        $isRepoSkill = $false
-        if ($relPath.StartsWith("skills\") -or $relPath.StartsWith("skills/")) {
-            $parts = $relPath.Split("\/")
-            if ($parts.Length -ge 2) {
-                $skillName = $parts[1]
-                $sourceSkillDir = Join-Path $sourceAgents "skills\$skillName"
-                $targetSkillDir = Join-Path $targetAgents "skills\$skillName"
-                if ((Test-Path $targetSkillDir) -and -not (Test-Path $sourceSkillDir)) {
-                    $isRepoSkill = $true
-                }
-            }
-        }
-
         if ((Test-Path $destPath) -and -not $Force) {
             if ($isProtected) {
                 Write-Host "  [SKIP] Preserving existing: .agents/$relPath" -ForegroundColor Yellow
-                return
-            }
-            if ($isRepoSkill) {
-                Write-Host "  [SKIP] Preserving repo-installed skill: $relPath" -ForegroundColor Yellow
                 return
             }
         }

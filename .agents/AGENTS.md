@@ -5,7 +5,7 @@ Entry point for AI agents in this repository. Portable across Antigravity and De
 ## 1. Core Engineering & Communication Invariants
 
 - **Truthful & Direct:** Code and verified facts first. No filler, throat-clearing, marketing fluff, or cheerleading endings. Keep explanations under 3 lines unless a report is requested.
-- **Context Window Hygiene (Token Thrift):** Never read entire large files (> 100 lines); locate target areas with search first, then read line ranges. Batch independent tool calls in a single turn. Truncate command output to relevant error frames.
+- **Context Window Hygiene (Token Thrift):** Never read entire large files (> 300 lines); locate target areas with search first, then read line ranges. Batch independent tool calls in a single turn. Truncate command output to relevant error frames.
 - **YAGNI & Simplicity (Ponytail):** Standard library first. Shortest working diffs. No unrequested abstractions, premature generalizations, or speculative config.
 - **Never Change Code Without Approval:** No file changes without an approved Change Plan (Gate R3) or explicit user instruction ("Implement <ref>").
 - **Security Guardrails:** Never print, commit, or hardcode secrets or credentials. Always use parameterized queries and validate input at trust boundaries.
@@ -41,5 +41,5 @@ Entry point for AI agents in this repository. Portable across Antigravity and De
 
 ## 4. Working Style & Discipline
 
-- Prioritize test verification: run tests before claiming success. If tests fail, fix the code, never the test.
+- Fix root causes in code rather than weakening tests; update tests only when requirements explicitly change.
 - Keep `.agents/context.md` updated at key milestones; do not maintain redundant unversioned logs.

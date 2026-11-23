@@ -1,24 +1,34 @@
 ---
 name: find-skills
-description: "Use when discovering, evaluating, and installing stack-specific or domain-specific agent skills into .agents/skills/. Do not use for invoking installed core skills."
+description: "Use ONLY when the user explicitly asks to find, scout, or install agent skills, or when invoked by /project-init. Do not trigger during normal coding, debugging, or 'how do I do X' questions."
 ---
 
 # Find Skills
 
-Discovers and installs domain- and stack-specific skills to extend agent capabilities.
+Discovers and installs domain- and stack-specific skills to extend agent capabilities using the `npx skills` ecosystem.
 
-## Workflow
+## CLI Commands
 
-1. **Identify Skill Need:** When encountering a specialized framework (e.g., Django, Next.js, Kubernetes) or language requiring specific conventions.
-2. **Search Sources:**
-   - Local plugin directories (e.g. `~/.gemini/config/plugins/`).
-   - Anthropic Agent Skills repositories and public agent registries.
-   - Web search using `/web-search` with specific library and task terms.
-3. **Evaluation Criteria:**
-   - Flat directory structure: `.agents/skills/<kebab-case>/SKILL.md`.
-   - Valid YAML frontmatter: `name` matching directory, precise routing `description`.
-   - Progressive disclosure: Procedural `SKILL.md` (< 150 lines), templates in `assets/`, checklists in `resources/`, Python scripts in `scripts/`.
-   - Standard library and YAGNI first; reject bloated dependencies.
-4. **Install & Verify:**
-   - Install skill into `.agents/skills/<skill-name>/`.
-   - Log installation in `.agents/context.md`.
+- **Search:** `npx skills find <query>` (use 1-3 focused keywords per query, e.g. `npx skills find fastapi`)
+- **Install (Universal Project-Local ONLY):**
+  `npx skills add <owner/repo> --skill <name> --agent universal`
+  *(Installs into `.agents/skills/<name>/SKILL.md` for both Antigravity and `dsh`. Never use `-g` or `--global`)*
+
+## Vetting & Approval Protocol
+
+Before installing any skill, follow this strict 5-point approval gate:
+
+1. **Reputable Publishers First:** Prioritize official organizations (e.g. `anthropics`, `vercel-labs`, `microsoft`) or widely adopted, high-install community repositories.
+2. **Present Candidates & Await Approval:** Present candidate skills in a concise Markdown table and STOP:
+
+| Skill | Source (`<owner/repo>`) | Why Matched |
+|---|---|---|
+| `<skill-name>` | `<owner/repo>` | `<1-line rationale matching project stack>` |
+
+Wait for explicit user confirmation before executing any install command.
+
+3. **Security Inspection:** Before executing bundled helper scripts, inspect `scripts/` for unsafe shell invocations, network calls, or prompt injection vectors.
+4. **Flash Routing Limit (<= 15 Skills):** Check total count in `.agents/skills/`. If installing would exceed 15 total skills, warn the user that additional skills may degrade Flash-model routing accuracy.
+5. **Post-Install Logging & Reload:**
+   - Log the installed skill (name, source, date) under `## Recent Changes` in `.agents/context.md`.
+   - Remind the user to run `/skills reload` (Antigravity) or start a fresh session (`dsh`) so the harness discovers the new skill.

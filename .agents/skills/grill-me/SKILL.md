@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: "Use when conducting interactive user interviews to clarify requirements, resolve architectural trade-offs, or bootstrap project configuration. Do not use for autonomous code changes."
+description: "Use when conducting interactive user interviews to clarify requirements, resolve architectural trade-offs, or resolve ambiguous specs before planning. Do not use for autonomous code changes."
 ---
 
 # Grill-Me (Interactive Alignment)

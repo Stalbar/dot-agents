@@ -9,7 +9,7 @@ Governs architectural decisions, structural refactors, and technology choices.
 
 ## Workflow
 
-1. **Context & Search:** Investigate the existing codebase structure using `/code-navigation` before proposing changes.
+1. **Context & Search:** Investigate the existing codebase structure using native search and file-reading tools before proposing changes.
 2. **Draft ADR:**
    - Run helper: `python .agents/skills/adr/scripts/adr.py "<title>"`
    - Creates `docs/00_adr/######-<slug>.md` from `.agents/skills/adr/assets/adr.template.md`.

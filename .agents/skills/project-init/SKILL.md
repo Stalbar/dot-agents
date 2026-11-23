@@ -9,22 +9,41 @@ Adapts the `.agents` governance kit to a project's architecture, tech stack, and
 
 ## Workflow
 
-1. **Self-Bootstrap:** Verify `.agents/AGENTS.md` and core skills exist.
-2. **Grill-Me Interview:** Conduct an interactive interview via `/grill-me` (ask one question at a time, recommended default first):
-   - Target harnesses (Antigravity, DSH, Claude Code).
-   - Project name, domain purpose, languages, and runtime versions.
-   - Frameworks (web, ORM, CLI), package managers, build tools.
-   - Test framework and exact full-suite test command.
-   - Linters, formatters, and pre-commit commands.
-   - Databases, environment configuration files, external services.
-3. **Fill Project Runtime Docs:** Populate the following files from `.agents/skills/project-init/assets/`:
-   - `.agents/project_overview.md`
-   - `.agents/architecture.md`
-   - `.agents/coding_standards.md`
-   - `.agents/USER.md`
-4. **Initialize Context:**
-   - Execute: `python .agents/skills/project-init/scripts/update-context.py --log "Initialized project governance"`
-5. **Scout Stack Skills:**
-   - Use `/find-skills` to discover and install any language- or framework-specific skills matching the project's stack.
-6. **Configure Harness Entry Points:**
-   - Ensure root bootstrap files exist: `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` pointing to `.agents/AGENTS.md`.
+### 1. Auto-Scan Repository (Fingerprint First)
+Before asking any questions, inspect repository configuration and manifest files to detect the tech stack:
+- Project manifests: `package.json`, `tsconfig.json`, `pyproject.toml`, `setup.py`, `Cargo.toml`, `go.mod`, `pom.xml`, `build.gradle`, `*.csproj`, `*.sln`, `composer.json`
+- Infrastructure: `Dockerfile`, `docker-compose.*`, Kubernetes/Helm manifests, Terraform files
+- CI/CD workflows: `.github/workflows/`, `.gitlab-ci.yml`, `azure-pipelines.yml`
+- Test & lint configs: `pytest.ini`, `jest.config.*`, `.eslintrc.*`, `ruff.toml`, etc.
+
+Extract: languages, frameworks, package manager, linter/formatter commands, and test suite commands.
+
+### 2. Targeted Confirmation (via `/grill-me` for Gaps Only)
+Present the detected findings. Ask exactly one question at a time using `/grill-me` ONLY for missing or ambiguous details:
+- Project domain purpose (if not obvious from README/manifests).
+- Target coding harnesses (Antigravity, DSH, Claude Code).
+- Exact full-suite test command (if multiple options exist or configuration is non-standard).
+
+### 3. Populate Runtime Docs
+Fill project documentation from `.agents/skills/project-init/assets/` using verified commands and findings:
+- `.agents/project_overview.md` (from `project-overview.template.md`)
+- `.agents/architecture.md` (from `architecture.template.md`)
+- `.agents/coding_standards.md` (from `coding-standards.template.md`)
+*(Note: `.agents/USER.md` is pre-populated with developer preferences and is only modified if the user explicitly requests changes).*
+
+### 4. Initialize Context
+Execute the context updater:
+`python .agents/skills/project-init/scripts/update-context.py --log "Initialized project governance"`
+
+### 5. Automatic Stack Skill Scouting
+1. Derive 2-4 targeted search queries from the detected stack (e.g. `npx skills find django`, `npx skills find pytest`).
+2. Shortlist at most 3-5 high-signal, non-overlapping candidate skills from reputable sources.
+3. Present candidate skills in the approval table per `/find-skills` and await user confirmation.
+4. Install approved skills using `npx skills add <owner/repo> --skill <name> --agent universal`.
+5. Remind user to run `/skills reload` (Antigravity) or restart session (`dsh`).
+
+### 6. Verify Root Entry Points
+Confirm that root harness entry points exist and point to `.agents/AGENTS.md`:
+- `AGENTS.md` (universal)
+- `CLAUDE.md` (Claude Code / optional)
+- `GEMINI.md` (Antigravity / optional)

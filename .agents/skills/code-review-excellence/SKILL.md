@@ -1,6 +1,6 @@
 ---
 name: code-review-excellence
-description: "Use when reviewing code changes, diffs, PRs, or artifacts for correctness, security, performance, and simplicity, or when conducting cross-model reviews. Do not use for writing code or drafting initial plans."
+description: "Use when reviewing code changes, diffs, PRs, or artifacts for correctness, security, performance, and simplicity, or auditing docs/prose for AI slop, or when conducting cross-model reviews. Do not use for writing code or drafting initial plans."
 ---
 
 # Code Review Excellence

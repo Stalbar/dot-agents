@@ -25,6 +25,11 @@ if [ -z "$TARGET_DIR" ] || [ ! -d "$TARGET_DIR" ]; then
     exit 1
 fi
 
+if [ "$TARGET_DIR" = "$SCRIPT_DIR" ]; then
+    echo "Error: Target repository cannot be the source dot-agents repository: $TARGET_REPO" >&2
+    exit 1
+fi
+
 echo "Installing .agents kit into: $TARGET_DIR"
 
 PROTECTED_FILES="project_overview.md architecture.md coding_standards.md context.md USER.md"
@@ -33,6 +38,7 @@ SOURCE_AGENTS="$SCRIPT_DIR/.agents"
 TARGET_AGENTS="$TARGET_DIR/.agents"
 mkdir -p "$TARGET_AGENTS"
 
+# Note: Target-only custom skills in .agents/skills/ are naturally preserved since iteration only traverses source files.
 # Copy .agents recursively while respecting protected files
 cd "$SOURCE_AGENTS"
 find . -mindepth 1 | while read -r item; do
@@ -40,9 +46,10 @@ find . -mindepth 1 | while read -r item; do
     src_item="$SOURCE_AGENTS/$rel_path"
     dst_item="$TARGET_AGENTS/$rel_path"
 
-    # Exclude git-related items
+    # Exclude .git directory and contents (allow .gitignore and dotfiles)
     case "$rel_path" in
-        .git*|*/.git*) continue ;;
+        .git|.git/*) continue ;;
+        *__pycache__*|*.pyc|*.pyo) continue ;;
     esac
 
     if [ -d "$src_item" ]; then
@@ -57,19 +64,6 @@ find . -mindepth 1 | while read -r item; do
                 echo "  [SKIP] Preserving existing: .agents/$rel_path"
                 continue
             fi
-        fi
-
-        # If file already exists and not force, check repo skills
-        if [ -f "$dst_item" ] && [ "$FORCE" = false ]; then
-            case "$rel_path" in
-                skills/*)
-                    skill_name="$(echo "$rel_path" | cut -d/ -f2)"
-                    if [ ! -d "$SOURCE_AGENTS/skills/$skill_name" ]; then
-                        echo "  [SKIP] Preserving repo-installed skill: $rel_path"
-                        continue
-                    fi
-                    ;;
-            esac
         fi
 
         mkdir -p "$(dirname "$dst_item")"
@@ -93,5 +87,5 @@ done
 
 echo ""
 echo "Installation successful! Next steps:"
-echo "1. cd \"$TARGET_DIR\""
+echo "1. cd "$TARGET_DIR""
 echo "2. Run /project-init to configure the governance kit for your stack."
