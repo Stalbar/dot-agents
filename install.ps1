@@ -239,7 +239,17 @@ if ($LocalIgnore) {
             $existingExcludeLines = Get-Content $excludePath | ForEach-Object { $_.Trim() }
         }
 
-        $ignoreEntries = @(".agents/", "AGENTS.md", "CLAUDE.md", "GEMINI.md", "skills-lock.json")
+        $ignoreEntries = @(
+            ".agents/",
+            "AGENTS.md",
+            "CLAUDE.md",
+            "GEMINI.md",
+            "skills-lock.json",
+            "docs/00_adr/",
+            "docs/01_implementation_plans/",
+            "docs/02_change_plans/",
+            "docs/03_test_plans/"
+        )
         $missingEntries = @()
         foreach ($ign in $ignoreEntries) {
             if ($existingExcludeLines -notcontains $ign) {

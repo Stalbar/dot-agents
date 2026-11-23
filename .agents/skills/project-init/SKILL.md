@@ -43,7 +43,4 @@ Execute the context updater:
 5. Remind user to run `/skills reload` (Antigravity) or restart session (`dsh`).
 
 ### 6. Verify Root Entry Points
-Confirm that root harness entry points exist and point to `.agents/AGENTS.md`:
-- `AGENTS.md` (universal)
-- `CLAUDE.md` (Claude Code / optional)
-- `GEMINI.md` (Antigravity / optional)
+Verify that root `AGENTS.md` exists and points to `.agents/AGENTS.md`. Only create secondary entry pointers (`CLAUDE.md` or `GEMINI.md`) if explicitly requested by the user.

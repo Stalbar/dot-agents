@@ -81,7 +81,7 @@ From this repository, run the installer pointing to your target project reposito
 | Flag (PowerShell / Bash) | Description |
 |---|---|
 | `-TargetRepo <path>` / `<path>` | Path to target project repository (required). |
-| `-LocalIgnore` / `--local-ignore` | Idempotently appends `.agents/`, `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `skills-lock.json` to the target repo's git private exclude (`.git/info/exclude`), leaving project `.gitignore` untouched. |
+| `-LocalIgnore` / `--local-ignore` | Idempotently appends `.agents/`, root pointers (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`), `skills-lock.json`, and local planning artifact directories (`docs/00_adr/`, `docs/01_implementation_plans/`, `docs/02_change_plans/`, `docs/03_test_plans/`) to the target repo's git private exclude (`.git/info/exclude`), leaving project `.gitignore` untouched. |
 | `-AllPointers` / `--all-pointers` | Copies `bootstrap/CLAUDE.md` and `bootstrap/GEMINI.md` in addition to default `bootstrap/AGENTS.md`. |
 | `-DryRun` / `--dry-run` | Previews file copies, removals, and local ignore modifications without altering disk state. |
 | `-Force` / `--force` | Overwrites existing context files and templates in target `.agents/`. |

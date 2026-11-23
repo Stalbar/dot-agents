@@ -218,7 +218,7 @@ if [ "$LOCAL_IGNORE" = true ]; then
         echo "Warning: Target repository is not a git repository; skipping --local-ignore." >&2
     else
         missing_entries=()
-        for ign in ".agents/" "AGENTS.md" "CLAUDE.md" "GEMINI.md" "skills-lock.json"; do
+        for ign in ".agents/" "AGENTS.md" "CLAUDE.md" "GEMINI.md" "skills-lock.json" "docs/00_adr/" "docs/01_implementation_plans/" "docs/02_change_plans/" "docs/03_test_plans/"; do
             if [ -f "$exclude_path" ] && grep -Fxq "$ign" "$exclude_path" 2>/dev/null; then
                 :
             else
