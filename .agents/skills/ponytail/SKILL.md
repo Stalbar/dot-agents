@@ -11,6 +11,7 @@ Build the simplest, shortest solution that works. YAGNI, standard library first,
 
 1. **Implement Only Approved Plans:** Never write project code without an approved Change Plan (Gate R3) or explicit user confirmation.
 2. **Standard Library First:** Use built-in language primitives before adding external dependencies.
-3. **Shortest Working Diff:** Make the smallest edit that solves the problem. Never touch unrelated code.
+3. **Shortest Working Diff:** Make the smallest edit that solves the problem. Never touch unrelated code or introduce formatting churn.
 4. **No Premature Abstraction:** Do not create interfaces for single implementations, complex inheritance hierarchies, or speculative config options.
 5. **Call-Graph Reachability:** Confirm new functions or classes are called by application entry points before considering work done.
+6. **Token-Thrifty Execution:** Locate target regions using targeted search before reading. Never read whole large files (>100 lines). Batch independent tool calls in a single turn.

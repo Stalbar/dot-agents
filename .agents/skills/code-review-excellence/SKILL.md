@@ -15,7 +15,7 @@ Systematic, constructive review focusing on correctness, security, performance, 
    - **Security:** Secret leakage, parameterized queries, boundary input validation.
    - **Simplicity (Ponytail):** Flag unrequested abstractions, premature optimizations, or bloat.
    - **Modularity & Reachability:** Pure business logic, functions < 50 lines, reachability from entry points.
-3. **Read-Only Static Sweep (Optional Hunter Mode):** Search for bug classes or orphaned code across the repository.
+3. **Read-Only Static Sweep (Hunter Mode):** Search for bug classes or orphaned code across the repository. Optional: run `python .agents/skills/code-review-excellence/scripts/audit-prose.py <file>` to check documentation.
 4. **Structured Verdict Output:**
 
 ```markdown

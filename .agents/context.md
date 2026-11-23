@@ -3,6 +3,7 @@
 **Last Updated:** 2026-11-23
 
 ## Recent Changes
+- [2026-11-23] Trimmed core skills to 10, removed memory and credential scaffolding, added install scripts and root README
 - Refactored repository into lean Anthropic Agent Skills-compliant architecture.
 - Replaced separate `agents/`, `commands/`, `prompts/`, and `rules/` layers with flat skills under `.agents/skills/`.
 - Condensed `.agents/AGENTS.md` to under 100 lines for high Flash-model token efficiency.

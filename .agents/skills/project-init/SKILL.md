@@ -11,7 +11,7 @@ Adapts the `.agents` governance kit to a project's architecture, tech stack, and
 
 1. **Self-Bootstrap:** Verify `.agents/AGENTS.md` and core skills exist.
 2. **Grill-Me Interview:** Conduct an interactive interview via `/grill-me` (ask one question at a time, recommended default first):
-   - Target harnesses (Antigravity, DSH, Claude Code, Cursor).
+   - Target harnesses (Antigravity, DSH, Claude Code).
    - Project name, domain purpose, languages, and runtime versions.
    - Frameworks (web, ORM, CLI), package managers, build tools.
    - Test framework and exact full-suite test command.
@@ -21,11 +21,10 @@ Adapts the `.agents` governance kit to a project's architecture, tech stack, and
    - `.agents/project_overview.md`
    - `.agents/architecture.md`
    - `.agents/coding_standards.md`
-   - `.agents/credentials.md` (gitignored, documents where secrets live)
    - `.agents/USER.md`
-4. **Initialize Context & Memory:**
+4. **Initialize Context:**
    - Execute: `python .agents/skills/project-init/scripts/update-context.py --log "Initialized project governance"`
 5. **Scout Stack Skills:**
    - Use `/find-skills` to discover and install any language- or framework-specific skills matching the project's stack.
 6. **Configure Harness Entry Points:**
-   - Ensure root bootstrap files exist: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and `.cursor/rules/` pointing to `.agents/AGENTS.md`.
+   - Ensure root bootstrap files exist: `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` pointing to `.agents/AGENTS.md`.

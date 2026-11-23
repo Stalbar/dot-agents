@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Update context.md date and optionally append daily memory log entry."""
+"""Update context.md date and optionally append recent changes."""
 
 import argparse
 import datetime
@@ -20,24 +20,19 @@ SKELETON = """# Current Context
 ## Open Questions
 """
 
-DAILY_HEADER = """# Daily Memory Log: {date}
-
-"""
-
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Update context.md and optionally log daily memory entry."
+        description="Update context.md date and optionally append a change entry."
     )
     parser.add_argument("--date", help="YYYY-MM-DD (default: today)")
-    parser.add_argument("--log", help="Append an entry to today's memory log")
+    parser.add_argument("--log", help="Append an entry under ## Recent Changes in context.md")
     args = parser.parse_args(argv)
 
     skill_dir = Path(__file__).resolve().parents[1]
     root = skill_dir.parents[2]
     agents_dir = root / ".agents"
     ctx = agents_dir / "context.md"
-    memory_dir = agents_dir / "memory"
     date = args.date or datetime.date.today().isoformat()
 
     if not ctx.exists():
@@ -55,15 +50,15 @@ def main(argv=None):
         ctx.write_text(updated, encoding="utf-8")
 
     if args.log:
-        memory_dir.mkdir(parents=True, exist_ok=True)
-        daily_file = memory_dir / f"{date}.md"
-        if not daily_file.exists():
-            daily_file.write_text(DAILY_HEADER.format(date=date), encoding="utf-8")
-
-        now_time = datetime.datetime.now().strftime("%H:%M")
-        with daily_file.open("a", encoding="utf-8") as f:
-            f.write(f"\n### [{now_time}] Update\n- {args.log}\n")
-        print(f"Logged to {daily_file}")
+        text = ctx.read_text(encoding="utf-8")
+        entry = f"- [{date}] {args.log}\n"
+        if "## Recent Changes" in text:
+            parts = text.split("## Recent Changes", 1)
+            updated = parts[0] + "## Recent Changes\n" + entry + parts[1].lstrip("\n")
+            ctx.write_text(updated, encoding="utf-8")
+        else:
+            ctx.write_text(text + f"\n## Recent Changes\n{entry}", encoding="utf-8")
+        print(f"Logged entry to {ctx}")
 
     print(ctx)
     return 0
