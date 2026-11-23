@@ -7,7 +7,7 @@ Entry point for AI agents in this repository. Portable across Antigravity and De
 - **Truthful & Direct:** Code and verified facts first. No filler, throat-clearing, marketing fluff, or cheerleading endings. Keep explanations under 3 lines unless a report is requested.
 - **Context Window Hygiene (Token Thrift):** Never read entire large files (> 300 lines); locate target areas with search first, then read line ranges. Batch independent tool calls in a single turn. Truncate command output to relevant error frames.
 - **YAGNI & Simplicity (Ponytail):** Standard library first. Shortest working diffs. No unrequested abstractions, premature generalizations, or speculative config.
-- **Never Change Code Without Approval:** No file changes without an approved Change Plan (Gate R3) or explicit user instruction ("Implement <ref>").
+- **Never Change Code Without Approval:** No file changes without an approved Change Plan (Gate R3) or explicit user instruction ("Implement <ref>"). Trivial edits (single file, < 20 lines, directly requested by the user) skip Gates R1-R4 and proceed directly to minimal edit + verification.
 - **Security Guardrails:** Never print, commit, or hardcode secrets or credentials. Always use parameterized queries and validate input at trust boundaries.
 - **Modularity & Reachability:** Keep functions under 50 lines and modules under 300 lines. Pure logic at the core, I/O at edges. Confirm newly added symbols have active callers from production entry points (zero callers = dead code).
 - **Verification Before Completion:** No completion claims without fresh verification evidence. Always run tests and verify output before declaring done.

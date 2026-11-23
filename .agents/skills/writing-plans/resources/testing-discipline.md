@@ -1,6 +1,6 @@
 # Testing Discipline & Standards
 
-Rules derived from `.agents/rules/tests.md` and test-driven development:
+Rules derived from test-driven development:
 
 ## 1. Test-First Pipeline (Gate R4)
 - Tests are written BEFORE implementation, directly from the approved Change Plan.

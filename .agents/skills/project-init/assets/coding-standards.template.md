@@ -17,8 +17,7 @@
 {{LANGUAGE_SECTIONS}}
 
 (Selected at init from the grill-me answers: style, package manager,
-test framework, lint tool. Stack-specific rules live in
-`.agents/rules/*_local.md`.)
+test framework, lint tool.)
 
 ## Code Organization
 
@@ -46,7 +45,7 @@ Document Args and Returns. Keep docstrings accurate when signatures change.
 - Add tests for new features.
 - Mock external dependencies.
 - Test error conditions.
-- See `.agents/rules/tests.md` and `.agents/rules/modularity.md`.
+- Follow test-first discipline and modular architecture.
 
 ## Linting
 
@@ -58,4 +57,3 @@ Document Args and Returns. Keep docstrings accurate when signatures change.
 - Update relevant docs when making changes.
 - Create change plans for significant modifications.
 - Keep README and docs up to date.
-- Document complex logic with concise comments.

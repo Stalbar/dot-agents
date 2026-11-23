@@ -1,0 +1,132 @@
+[
+  {
+    "prompt": "We need to choose between PostgreSQL and MongoDB for our new telemetry ingest service. Help evaluate trade-offs and record an architectural decision.",
+    "expected_skill": "adr",
+    "note": "Architecture decision record evaluation and authoring (Gate R1)"
+  },
+  {
+    "prompt": "Create an ADR documenting our decision to adopt Apache Kafka for cross-service asynchronous event streaming.",
+    "expected_skill": "adr",
+    "note": "Formal ADR creation for event streaming architecture"
+  },
+  {
+    "prompt": "Draft an implementation roadmap for a multi-module authentication refactor before we begin modifying code.",
+    "expected_skill": "writing-plans",
+    "note": "System roadmap / Implementation Plan authoring (Gate R2)"
+  },
+  {
+    "prompt": "Author a scoped change plan and pre-implementation test plan for validating JWT expiration edge cases.",
+    "expected_skill": "writing-plans",
+    "note": "Scoped Change Plan and Test Plan authoring (Gate R3/R4)"
+  },
+  {
+    "prompt": "Verify all unit and integration tests pass and generate the formal completion report for change plan 000004.",
+    "expected_skill": "verification-before-completion",
+    "note": "Verification evidence gathering and completion report generation"
+  },
+  {
+    "prompt": "Check call-graph reachability for our new billing service functions and run full regression checks before marking this task done.",
+    "expected_skill": "verification-before-completion",
+    "note": "Zero-caller reachability check and regression verification"
+  },
+  {
+    "prompt": "Review this pull request diff for security vulnerabilities, input sanitization issues, and unintended complexity.",
+    "expected_skill": "code-review-excellence",
+    "note": "4-dimension code and security review"
+  },
+  {
+    "prompt": "Audit docs/architecture.md and remove AI slop, conversational filler, and vague buzzwords.",
+    "expected_skill": "code-review-excellence",
+    "note": "Prose and documentation audit for AI slop using audit-prose.py"
+  },
+  {
+    "prompt": "Commit staged changes with summary 'fix auth token expiration check' referencing ADR-000002.",
+    "expected_skill": "git-commit",
+    "note": "Standardized imperative git commit formatting via commit.py"
+  },
+  {
+    "prompt": "Please format and execute a git commit for the completed and verified password hashing bugfix.",
+    "expected_skill": "git-commit",
+    "note": "Explicit user instruction to commit verified changes"
+  },
+  {
+    "prompt": "Bootstrap .agents governance in this repository and adapt the documentation templates to our Python FastAPI project.",
+    "expected_skill": "project-init",
+    "note": "Repository initialization and governance setup"
+  },
+  {
+    "prompt": "Initialize the AI workflow for this repository by auto-scanning our dependencies and scaffolding runtime context docs.",
+    "expected_skill": "project-init",
+    "note": "Auto-scan and project bootstrapping"
+  },
+  {
+    "prompt": "Search and install agent skills for Django REST Framework and Celery task handling.",
+    "expected_skill": "find-skills",
+    "note": "Finding and installing stack-specific community skills via npx skills"
+  },
+  {
+    "prompt": "Can you find and add an agent skill for Kubernetes manifest authoring?",
+    "expected_skill": "find-skills",
+    "note": "Explicit user request to scout and install a skill"
+  },
+  {
+    "prompt": "Diagnose why test_user_login is intermittently failing with a 500 status code under concurrent load.",
+    "expected_skill": "systematic-debugging",
+    "note": "4-phase systematic bug diagnosis before proposing a fix"
+  },
+  {
+    "prompt": "Investigate the root cause of the NullReferenceException thrown during checkout order completion.",
+    "expected_skill": "systematic-debugging",
+    "note": "Surgical root cause investigation"
+  },
+  {
+    "prompt": "Implement the approved change plan for user deletion using standard library modules only, with minimal diffs.",
+    "expected_skill": "ponytail",
+    "note": "Minimalist implementation of approved change plan"
+  },
+  {
+    "prompt": "Implement the minimal working code changes approved in change plan 000003.",
+    "expected_skill": "ponytail",
+    "note": "Direct implementation of approved plan in YAGNI mode"
+  },
+  {
+    "prompt": "Interview me to pressure-test the distributed caching strategy and uncover edge cases before we draft an implementation plan.",
+    "expected_skill": "grill-me",
+    "note": "1-question interactive interview to pressure-test requirements"
+  },
+  {
+    "prompt": "Grill me on the requirements and constraints for the proposed elasticsearch migration.",
+    "expected_skill": "grill-me",
+    "note": "Trade-off and constraints interrogation before planning"
+  },
+  {
+    "prompt": "Optimize this SQL query: SELECT * FROM orders WHERE user_id = 42",
+    "expected_skill": null,
+    "note": "Routine query optimization; no kit workflow or skill needed"
+  },
+  {
+    "prompt": "Fix the typo on line 14 of src/utils.py",
+    "expected_skill": null,
+    "note": "Trivial single-line typo fix; fast path applies without skills"
+  },
+  {
+    "prompt": "Explain how the calculate_tax function works in billing.py",
+    "expected_skill": null,
+    "note": "Read-only code explanation; no workflow or plan needed"
+  },
+  {
+    "prompt": "How do I implement a thread-safe singleton in C#?",
+    "expected_skill": null,
+    "note": "General language/programming concept question"
+  },
+  {
+    "prompt": "What is the difference between Array.prototype.map and Array.prototype.forEach in JavaScript?",
+    "expected_skill": null,
+    "note": "Standard language reference question"
+  },
+  {
+    "prompt": "Write a python regex to validate email addresses.",
+    "expected_skill": null,
+    "note": "Simple standalone snippet request"
+  }
+]

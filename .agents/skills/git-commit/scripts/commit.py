@@ -7,7 +7,7 @@ import sys
 
 
 def git(*args, check=True):
-    res = subprocess.run(["git", *args], capture_output=True, text=True)
+    res = subprocess.run(["git", *args], capture_output=True, text=True, encoding="utf-8")
     if check and res.returncode != 0:
         err = res.stderr.strip() or f"git {' '.join(args)} failed with exit code {res.returncode}"
         raise RuntimeError(err)
@@ -78,7 +78,7 @@ def main(argv=None):
                 print("aborted, nothing committed")
                 return 3
 
-        commit_res = subprocess.run(["git", "commit", "-F", "-"], input=msg, text=True)
+        commit_res = subprocess.run(["git", "commit", "-F", "-"], input=msg, text=True, encoding="utf-8")
         return commit_res.returncode
     except RuntimeError as e:
         print(f"error: {e}", file=sys.stderr)

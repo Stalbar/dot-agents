@@ -3,3 +3,4 @@ settings.local.json
 *.local.*
 __pycache__/
 *.py[cod]
+.kit-manifest
